@@ -17,13 +17,24 @@
 
 int main()
 {
-	int fd = open("file_ds", O_RDONLY);
+	int fd;
 	char *line;
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	free(line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
+
+	fd = open("file_ds", O_RDONLY);
+	// get_next_line(fd, &line);
+	// printf("%s\n", line);
+	// free(line);
+	// get_next_line(fd, &line);
+	// printf("%s\n", line);
+	// free(line);
+	// get_next_line(fd, &line);
+	// printf("%s\n", line);
+	// free(line);
+	while ((get_next_line(fd, &line)) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
 	free(line);
 	return (0);
 }

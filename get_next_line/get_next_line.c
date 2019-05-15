@@ -26,19 +26,21 @@ int		get_next_line(const int fd, char **line)
 	if (!tab)
 		tab = ft_strnew(0);
 	i = 0;
-	if (!ft_strchr(tab, '\n'))
+	while ((rd = read(fd, buff, BUFF_SIZE)))
 	{
-		while ((rd = read(fd, buff, BUFF_SIZE)))
-		{
-			buff[rd] = '\0';
-			tab = ft_strjoin(tab, buff);
-			if (ft_strchr(buff, '\n'))
-				break ;
-		}
+		buff[rd] = '\0';
+		tab = ft_strjoin(tab, buff);
+		if (ft_strchr(buff, '\n'))
+			break ;
 	}
-	while (tab[i] != '\n')
+	while (tab[i] != '\n' && tab[i] != '\0')
 		i++;
 	*line = ft_strsub(tab, 0, i);
-	tab = ft_strdup(&tab[i + 1]);
+	if (tab[i] == '\n')
+		tab = ft_strdup(&tab[i + 1]);
+	else
+		tab = ft_strdup(&tab[i]);
+	if (rd == 0)
+		return (0);
 	return (1);
 }
