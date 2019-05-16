@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_getindex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aazeroua <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/22 16:36:32 by aazeroua          #+#    #+#             */
-/*   Updated: 2019/05/16 04:56:13 by aazeroua         ###   ########.fr       */
+/*   Created: 2019/04/21 02:44:39 by aazeroua          #+#    #+#             */
+/*   Updated: 2019/04/21 02:48:19 by aazeroua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 799999
+#include "libft.h"
 
-# include "libft/libft.h"
+int		ft_getindex(char *str, char c)
+{
+	int i;
 
-int		get_next_line(const int fd, char **line);
-#endif
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != c)
+			i++;
+		else
+			return (i);
+	}
+	return (0);
+}
