@@ -6,7 +6,7 @@
 /*   By: aazeroua <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:36:19 by aazeroua          #+#    #+#             */
-/*   Updated: 2019/05/14 23:51:43 by aazeroua         ###   ########.fr       */
+/*   Updated: 2019/05/16 20:23:52 by aazeroua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,31 @@ int		get_next_line(const int fd, char **line)
 	int			rd;
 	char		buff[BUFF_SIZE + 1];
 	static char	*tab;
+	char *tm;
 
 	if (fd < 0 || !line || !fd)
 		return (-1);
 	if (!tab)
 		tab = ft_strnew(0);
 	i = 0;
-	while ((rd = read(fd, buff, BUFF_SIZE)))
+	while ((!ft_strchr(tab, '\n')) && (rd = read(fd, buff, BUFF_SIZE)))
 	{
 		buff[rd] = '\0';
-		tab = ft_strjoin(tab, buff);
-		if (ft_strchr(buff, '\n'))
-			break ;
+		tm = ft_strjoin(tab, buff);
+		free(tab);
+		tab = tm;
+		free(tm);
 	}
+	if (rd == 0 && *tab == '\0')
+		return (0);
 	while (tab[i] != '\n' && tab[i] != '\0')
-		i++;
+		    i++;
 	*line = ft_strsub(tab, 0, i);
+	//tm = tab;
 	if (tab[i] == '\n')
 		tab = ft_strdup(&tab[i + 1]);
 	else
-		tab = ft_strdup(&tab[i]);
-	if (rd == 0)
-		return (0);
+		tab = ft_strdup("\0");
+	//free(tm);
 	return (1);
 }
