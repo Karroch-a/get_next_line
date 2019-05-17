@@ -6,7 +6,7 @@
 /*   By: aazeroua <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 04:47:44 by aazeroua          #+#    #+#             */
-/*   Updated: 2019/05/16 21:58:20 by aazeroua         ###   ########.fr       */
+/*   Updated: 2019/05/17 20:38:29 by aazeroua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main()
 	int fd;
 	char *line;
 
-	fd = open("file_ds", O_RDONLY);
+	fd = open("filetest", O_RDONLY);
 	// get_next_line(fd, &line);
 	// printf("%s\n", line);
 	// free(line);

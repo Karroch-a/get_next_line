@@ -6,7 +6,7 @@
 /*   By: aazeroua <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:36:19 by aazeroua          #+#    #+#             */
-/*   Updated: 2019/05/17 00:55:20 by aazeroua         ###   ########.fr       */
+/*   Updated: 2019/05/17 19:18:09 by aazeroua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ int		get_next_line(const int fd, char **line)
 		buff[rd] = '\0';
 		tm = ft_strjoin(tab[fd], buff);
 		free(tab[fd]);
-		tab[fd] = ft_strdup(tm);
-		free(tm);
+		tab[fd] = tm;
 	}
-	if (rd < 1 && !*tab[fd])
-		return (rd);
+	if (!*tab[fd] || rd < 0)
+		return (rd < 0 ? -1 : 0);
 	while (tab[fd][i] != '\n' && tab[fd][i] != '\0')
 		    i++;
 	*line = ft_strsub(tab[fd], 0, i);
@@ -43,15 +42,13 @@ int		get_next_line(const int fd, char **line)
 	{
 		tm = ft_strdup(&tab[fd][i + 1]);
 		free(tab[fd]);
-		tab[fd] = ft_strdup(tm);
-		free(tm);
+		tab[fd] = tm;
 	}
 	else
 	{
 		tm = ft_strdup("\0");
 		free(tab[fd]);
-		tab[fd] = ft_strdup(tm);
-		free(tm);
+		tab[fd] = tm;
 	}
 	return (1);
 }
